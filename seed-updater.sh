@@ -16,9 +16,6 @@ github_repo_hedgehog="unigrid-project/hedgehog"
 github_repo_daemon="unigrid-project/daemon"
 github_repo_groundhog="unigrid-project/groundhog"
 
-# Java Download
-JAVA_URL_LINK='https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb'
-
 # Check if jq is installed
 if ! command -v jq >/dev/null 2>&1; then
     echo "jq is not installed. Attempting to install..."
@@ -82,7 +79,6 @@ chmod +x /usr/local/bin/hedgehog.bin
 chown "${USER}":"${USER}" /usr/local/bin/groundhog.jar
 chmod +x /usr/local/bin/groundhog.jar
 
-
 # Add the /usr/local/bin/ directory to the PATH variable if it's not already there
 if ! echo "$PATH" | grep -q -E "(^|:)$HOME/.local/bin($|:)"; then
     echo 'export PATH="$HOME/.local/bin:$PATH"' >>~/.bashrc
@@ -105,24 +101,16 @@ echo "Adding groundhog function to .bash_aliases..."
 echo "${groundhog_function}" >>~/.bash_aliases
 
 INSTALL_JAVA() {
-    JAVA_URL=${1}
-    JAVA_FILENAME=$(basename "${JAVA_URL}" | tr -d '\r')
-    stty sane 2>/dev/null
-    wget -4 "${JAVA_URL}" -O /var/unigrid/latest-github-releasese/"${JAVA_FILENAME}" -q --show-progress --progress=bar:force 2>&1
-    echo "Downloaded ${JAVA_FILENAME}"
-    if [[ $(echo "${JAVA_FILENAME}" | grep -c '.deb$') -eq 1 ]]; then
-        WAIT_FOR_APT_GET
-        echo "Installing java"
-        sudo -n dpkg -i /var/unigrid/latest-github-releasese/"${JAVA_FILENAME}"
-        echo "Extracting Java deb package."
-        echo "$(java -version) "
-    fi
+    sudo apt-get update
+    echo "Installing java"
+    sudo apt-get install openjdk-17-jdk
+    echo "$(java -version) "
 }
 
 # check if java is installed
 if ! command -v java >/dev/null 2>&1; then
     echo "Java is not installed. Attempting to install..."
-    INSTALL_JAVA "${JAVA_URL_LINK}"
+    INSTALL_JAVA
 fi
 
 # setup fail2ban
@@ -217,4 +205,3 @@ echo "To run the ugd_service in debug, run the following command:"
 echo
 echo "    bash -x ugd_service start"
 echo
-
