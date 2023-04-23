@@ -181,6 +181,14 @@ touch $HOME/.unigrid/unigrid.pid
 chown "${USER}":"${USER}" $HOME/.unigrid/unigrid.pid
 chmod 600 $HOME/.unigrid/unigrid.pid
 
+touch $HOME/.unigrid/groundhog.pid
+chown "${USER}":"${USER}" $HOME/.unigrid/groundhog.pid
+chmod 600 $HOME/.unigrid/groundhog.pid
+
+touch $HOME/.unigrid/hedgehog.pid
+chown "${USER}":"${USER}" $HOME/.unigrid/hedgehog.pid
+chmod 600 $HOME/.unigrid/hedgehog.pid
+
 # Source .bash_aliases to make the groundhog function available immediately
 echo "Sourcing .bash_aliases..."
 source ~/.bash_aliases
