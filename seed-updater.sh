@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+# Copyright © 2021-2023 The Unigrid Foundation, UGD Software AB
 
 # Check if the script is running as root
 if [ "$(id -u)" -ne 0 ]; then
