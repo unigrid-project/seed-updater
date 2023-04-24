@@ -8,7 +8,7 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-USER=$(logname)
+USER=$(logname 2>/dev/null || echo "${USER:-$(whoami)}")
 
 echo "USER: $USER"
 # Set your GitHub repository information
