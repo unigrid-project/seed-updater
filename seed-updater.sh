@@ -159,6 +159,7 @@ echo "Downloading service.sh script and saving it to /usr/local/bin/ugd_service.
 curl -s -L -o "/tmp/ugd_service" "https://raw.githubusercontent.com/unigrid-project/unigrid-docker/main/scripts/service.sh"
 mv "/tmp/ugd_service" "/usr/local/bin/ugd_service"
 chmod +x "/usr/local/bin/ugd_service"
+chown "${USER}":"${USER}" "/usr/local/bin/ugd_service"
 
 # MOVE THE PID USED BY THE SERVICE TO THE .unigrid DIRECTORY
 # Create the .unigrid directory if it doesn't exist
