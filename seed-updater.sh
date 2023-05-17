@@ -8,6 +8,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+echo udge_service stop
+
 USER=$(logname 2>/dev/null || echo "${USER:-$(whoami)}")
 
 echo "USER: $USER"
@@ -177,6 +179,8 @@ chmod 600 $HOME/.unigrid/groundhog.pid
 touch $HOME/.unigrid/hedgehog.pid
 chown "${USER}":"${USER}" $HOME/.unigrid/hedgehog.pid
 chmod 600 $HOME/.unigrid/hedgehog.pid
+
+echo udge_service start
 
 # Source .bash_aliases to make the groundhog function available immediately
 echo "Sourcing .bash_aliases..."
