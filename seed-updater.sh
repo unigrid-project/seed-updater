@@ -10,7 +10,7 @@ fi
 
 command_stop="udge_service stop"
 eval $command_stop
-
+mkdir ~/.unigrid
 
 USER=$(logname 2>/dev/null || echo "${USER:-$(whoami)}")
 
@@ -105,9 +105,9 @@ echo "Adding groundhog function to .bash_aliases..."
 echo "${groundhog_function}" >>~/.bash_aliases
 
 INSTALL_JAVA() {
-    sudo apt-get update
+    sudo apt-get update -y
     echo "Installing java"
-    sudo apt-get install openjdk-17-jdk
+    sudo apt-get install openjdk-17-jdk -y
     echo "$(java -version) "
 }
 
