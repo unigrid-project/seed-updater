@@ -8,9 +8,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-command_stop="udge_service stop"
+command_stop="udg_service stop"
 eval $command_stop
-mkdir ~/.unigrid
 
 USER=$(logname 2>/dev/null || echo "${USER:-$(whoami)}")
 
@@ -167,22 +166,9 @@ chown "${USER}":"${USER}" "/usr/local/bin/ugd_service"
 
 # MOVE THE PID USED BY THE SERVICE TO THE .unigrid DIRECTORY
 # Create the .unigrid directory if it doesn't exist
-mkdir -p $HOME/.unigrid
+mkdir ~/.unigrid
 
-# Set the PIDFILE location to the .unigrid directory
-touch $HOME/.unigrid/unigrid.pid
-chown "${USER}":"${USER}" $HOME/.unigrid/unigrid.pid
-chmod 600 $HOME/.unigrid/unigrid.pid
-
-touch $HOME/.unigrid/groundhog.pid
-chown "${USER}":"${USER}" $HOME/.unigrid/groundhog.pid
-chmod 600 $HOME/.unigrid/groundhog.pid
-
-touch $HOME/.unigrid/hedgehog.pid
-chown "${USER}":"${USER}" $HOME/.unigrid/hedgehog.pid
-chmod 600 $HOME/.unigrid/hedgehog.pid
-
-command_start="udge_service start"
+command_start="udg_service start"
 eval $command_start
 
 
